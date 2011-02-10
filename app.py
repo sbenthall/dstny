@@ -13,7 +13,7 @@ dg = jsgn.open_graph("graph.json")
 
 @app.route("/")
 def index():
-    return render_template('index.html', nodes=dg.as_dict()['nodes'].keys())
+    return render_template('index.html', nodes=dg.get_nodes())
 
 @app.route("/<nodeid>")
 def node(nodeid):
