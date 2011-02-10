@@ -1,2 +1,2 @@
 -e git+git://github.com/sbenthall/jsgn.git#egg=jsgn
-install flask
+Flask
