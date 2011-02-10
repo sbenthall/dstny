@@ -3,7 +3,7 @@ Index.
 <ul>
 {% for node in nodes %}
   <li>
-    <a name="{{ node.id }}" href="/{{ node }}">{{ node }}</a>
+    <a name="{{ node.id }}" href="/node/{{ node.id }}">{{ node.id }}</a>
     <ul>
       {% for child in node.children() %}
       <li><a href="#{{ child.id }}">{{ child.id }}</a></li>
