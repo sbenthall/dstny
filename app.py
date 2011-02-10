@@ -15,12 +15,15 @@ dg = jsgn.open_graph("graph.json")
 def index():
     return render_template('index.html', nodes=dg.get_nodes())
 
-@app.route("/<nodeid>")
+@app.route("/node/<nodeid>", methods=['GET', 'PUT'])
 def node(nodeid):
-    if dg.has_node(nodeid):
-        return render_template('node.html', node=dg.get_node(nodeid))
+    if request.method == 'PUT':
+        print request['id']
     else:
-        return render_template('new_node.html', nodeid=nodeid)
+        if dg.has_node(nodeid):
+            return render_template('node.html', node=dg.get_node(nodeid))
+        else:
+            return render_template('new_node.html', nodeid=nodeid)
 
 if __name__ == "__main__":
     app.run()
