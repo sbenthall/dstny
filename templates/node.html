@@ -1,0 +1,8 @@
+<h1>{{ node.id }}</h1>
+
+
+<h2>Links to</h2>
+
+{% for node in node.children() %}
+  <li><a href="/{{ node.id }}">{{ node.id }}</a></li>
+{% endfor %}
