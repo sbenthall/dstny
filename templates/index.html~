@@ -1,7 +1,0 @@
-Index.
-
-<ul>
-{% for node in nodes %}
-  <li><a href="/{{ node }}">{{ node }}</a></li>
-{% endfor %}
-</ul>
