@@ -2,6 +2,7 @@ from flask import Flask
 from flask import render_template
 from flask import request
 from flask import redirect
+from flask import url_for
 import os.path
 import json
 from jsgn import jsgn
@@ -19,7 +20,13 @@ def index():
 @app.route("/node/<nodeid>", methods=['GET', 'PUT'])
 def node(nodeid):
     if request.method == 'PUT':
-        print request['id']
+        nodeid = request.values['id']
+        ## currently overwrites.  Want?
+        ## add metadata?
+        node = dg.add_node(nodeid)
+        jsgn.save_graph(dg, graph_file_name)
+        url = url_for('node',nodeid=nodeid)
+        return "{\"nodeid\": \"%s\",\"url\": \"%s\"}" % (nodeid, url)
     else:
         if dg.has_node(nodeid):
             return render_template('node.html', node=dg.get_node(nodeid))
