@@ -8,8 +8,9 @@ from jsgn import jsgn
 
 app = Flask(__name__)
 
-dg = jsgn.open_graph("graph.json")
+graph_file_name = "graph.json"
 
+dg = jsgn.open_graph(graph_file_name)
 
 @app.route("/")
 def index():
