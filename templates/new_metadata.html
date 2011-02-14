@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block title %}{{nodeid}} - Metadata - {{key}}{% endblock %}
+{% block head %}
+  {{ super() }}
+  <style type="text/css">
+  </style>
+  <script type="text/javascript">
+    var nodeid = "{{node.id}}";
+    var key = "{{key}}"
+  </script>
+{% endblock %}
+{% block content %}
+  <textarea id="enter-metadata-value-textarea">
+    {{node.metadata[key]}}
+  </textarea>
+  <input type="button" value="Enter Metadata" id="enter-metadata-value-button"></input>
+{% endblock %}
