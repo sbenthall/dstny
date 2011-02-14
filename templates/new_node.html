@@ -1,15 +1,18 @@
-<html>
-  <head>
-    <script type="text/javascript" src="/static/jquery-1.5.js"></script>
-    <script type="text/javascript" src="/static/dstny.js"></script>
-    <script type="text/javascript">
-      var nodeid = "{{nodeid}}";
-    </script>
-  </head> 
-  <body>
+{% extends "layout.html" %}
+{% block title %}{{nodeid}}{% endblock %}
+{% block head %}
+  {{ super() }}
+  <style type="text/css">
+    #create-node-div {
+    background-color:green
+    }
+  </style>
+  <script type="text/javascript">
+    var nodeid = "{{nodeid}}";
+  </script>
+{% endblock %}
+{% block content %}
     {{nodeid}} does not exist.
 
-    <div id="create-node-div" style="background-color:green">Create this node</div>
-    
-  </body>
- </html>
+    <span id="create-node-div">Create this node</span>
+{% endblock %}
