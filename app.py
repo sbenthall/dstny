@@ -20,6 +20,10 @@ def save():
 def index():
     return render_template('index.html', nodes=dg.get_nodes())
 
+@app.route("/graph")
+def graph():
+    return dg.dump()
+
 @app.route("/node/<nodeid>", methods=['GET', 'PUT','DELETE'])
 def node(nodeid):
     if request.method == 'PUT':
