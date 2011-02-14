@@ -1,14 +1,24 @@
-Index.
+{% extends "layout.html" %}
+{% block title %}Index{% endblock %}
+{% block head %}
+  {{ super() }}
+  <style type="text/css">
+    .remove-node-span { background-color: #CCCCCC; }
+  </style>
+{% endblock %}
+{% block content %}
+  <h1>Index</h1>
+  <ul>
+    {% for node in nodes %}
+    <li>
+      <a name="{{ node.id }}" href="/node/{{ node.id }}">{{ node.id }}</a> - <span class="remove-node-span" data-node="{{node.id}}">Remove</span>
+      <ul>
+        {% for child in node.children() %}
+        <li><a href="#{{ child.id }}">{{ child.id }}</a></li>
+        {% endfor %}
+      </ul>
+    </li>
+    {% endfor %}
+  </ul>
+{% endblock %}
 
-<ul>
-{% for node in nodes %}
-  <li>
-    <a name="{{ node.id }}" href="/node/{{ node.id }}">{{ node.id }}</a>
-    <ul>
-      {% for child in node.children() %}
-      <li><a href="#{{ child.id }}">{{ child.id }}</a></li>
-      {% endfor %}
-    </ul>
-  </li>
-{% endfor %}
-</ul>

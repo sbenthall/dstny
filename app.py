@@ -17,7 +17,7 @@ dg = jsgn.open_graph(graph_file_name)
 def index():
     return render_template('index.html', nodes=dg.get_nodes())
 
-@app.route("/node/<nodeid>", methods=['GET', 'PUT'])
+@app.route("/node/<nodeid>", methods=['GET', 'PUT','DELETE'])
 def node(nodeid):
     if request.method == 'PUT':
         nodeid = request.values['id']
@@ -27,6 +27,10 @@ def node(nodeid):
         jsgn.save_graph(dg, graph_file_name)
         url = url_for('node',nodeid=nodeid)
         return "{\"nodeid\": \"%s\",\"url\": \"%s\"}" % (nodeid, url)
+    elif request.method == 'DELETE':
+        dg.remove_node(nodeid)
+        jsgn.save_graph(dg, graph_file_name)
+        return "{}"
     else:
         if dg.has_node(nodeid):
             return render_template('node.html', node=dg.get_node(nodeid))
