@@ -7,13 +7,31 @@ $(document).ready(function(){
                 id: nodeid
             },
             dataType: "json",
-            context: window,
             success: function(data, textStatus){
                 //window.location = data.url;
                 location.reload()
                 // location.replace(location.href.replace(/\?.*$/, '') + '?' + Math.random());
             }
         })
-    })
+    });
+
+    $('.remove-node-span').click(
+        function(evt){
+            var nodeid = $(this).attr('data-node');
+            $.ajax('/node/' + nodeid, {
+                type: 'DELETE',
+                data: {
+
+                },
+                dataType: "json",
+                context: this,
+                success: function(data){
+                    $(this).parent().remove()
+                }
+            })
+        }
+    );
+
+
 })
   
