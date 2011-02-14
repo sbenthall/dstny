@@ -44,5 +44,34 @@ def node(nodeid):
         else:
             return render_template('new_node.html', nodeid=nodeid)
 
+
+@app.route("/node/<nodeid>/metadata/<key>", methods=['GET','POST'])
+def node_metadata(nodeid, key):
+    node = dg.get_node(nodeid)
+
+    if node is None:
+        pass
+    elif request.method == 'GET':
+        if 'edit' in request.args or not key in node.metadata:
+            return render_template('new_metadata.html', node=node, key=key)
+        else:
+            return node.metadata[key]
+    elif request.method == 'POST':
+        node.metadata[key] = request.values['value']
+        save()
+        return "{}"
+
+
+@app.route("/edge/<from_node>/<to_node>", methods=['PUT','DELETE'])
+def edge(from_node, to_node):
+    if request.method == 'PUT':
+        dg.add_edge(from_node, to_node);
+        save()
+        return "{}"
+    elif request.method == 'DELETE':
+        dg.remove_edge(from_node, to_node);
+        save()
+        return "{}"
+
 if __name__ == "__main__":
     app.run()
