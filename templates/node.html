@@ -1,8 +1,38 @@
+{% extends "layout.html" %}
+{% block title %}{{node.id}}{% endblock %}
+{% block head %}
+  {{ super() }}
+  <style type="text/css">
+    .remove-edge-span { background-color: #CCCCCC; }
+    .edit-metadata-span { background-color: #88CCCC; }
+  </style>
+  <script type="text/javascript">
+    var nodeid = "{{node.id}}";
+  </script>
+{% endblock %}
+{% block content %}
 <h1>{{ node.id }}</h1>
-
 
 <h2>Links to</h2>
 
 {% for node in node.children() %}
-  <li><a href="/node/{{ node.id }}">{{ node.id }}</a></li>
+  <li><a href="/node/{{ node.id }}">{{ node.id }}</a> - <span class="remove-edge-span" data-node="{{node.id}}">Remove</span></li>
 {% endfor %}
+
+<input type="text" name="to-node" id="to-node-input"></input>
+<input type="button" name="add-edge-button" value="Add Link" id="add-edge-button"></input>
+
+
+<h2>Metadata</h2>
+
+{% for key, val in node.metadata.items() %}
+<h3>{{key}}</h3>
+<span class="edit-metadata-span" data-key="{{key}}">Edit</span>
+<p>{{val}}</p>
+{% endfor %}
+
+
+<input type="text" name="metadata-key" id="metadata-key-input"></input>
+<input type="button" name="add-metadata-key-button" value="Add Metadata" id="add-metadata-key-button"></input>
+
+{% endblock %}
