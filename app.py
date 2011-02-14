@@ -13,6 +13,9 @@ graph_file_name = "graph.json"
 
 dg = jsgn.open_graph(graph_file_name)
 
+def save():
+    jsgn.save_graph(dg, graph_file_name)    
+
 @app.route("/")
 def index():
     return render_template('index.html', nodes=dg.get_nodes())
@@ -24,12 +27,12 @@ def node(nodeid):
         ## currently overwrites.  Want?
         ## add metadata?
         node = dg.add_node(nodeid)
-        jsgn.save_graph(dg, graph_file_name)
+        save()
         url = url_for('node',nodeid=nodeid)
         return "{\"nodeid\": \"%s\",\"url\": \"%s\"}" % (nodeid, url)
     elif request.method == 'DELETE':
         dg.remove_node(nodeid)
-        jsgn.save_graph(dg, graph_file_name)
+        save()
         return "{}"
     else:
         if dg.has_node(nodeid):
