@@ -10,6 +10,7 @@ from jsgn import jsgn
 app = Flask(__name__)
 
 graph_file_name = "graph.json"
+node_template_file_name = "node_template.json"
 
 dg = jsgn.open_graph(graph_file_name)
 
@@ -29,8 +30,10 @@ def node(nodeid):
     if request.method == 'PUT':
         nodeid = request.values['id']
         ## currently overwrites.  Want?
-        ## add metadata?
-        node = dg.add_node(nodeid)
+        ## use template to preload metadata fields
+        file = open(node_template_file_name,"r")
+        metadata = json.loads(file.read())
+        node = dg.add_node(nodeid, **metadata)
         save()
         url = url_for('node',nodeid=nodeid)
         return "{\"nodeid\": \"%s\",\"url\": \"%s\"}" % (nodeid, url)
