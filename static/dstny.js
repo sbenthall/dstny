@@ -88,5 +88,18 @@ $(document).ready(function(){
                 + $(this).attr("data-key") + "?edit";
         });
 
+    $(".remove-metadata-span").click(
+        function(evt){
+            metadata_url = window.location + "/metadata/"
+                + $(this).attr("data-key");
+            $.ajax(metadata_url, {
+                type: 'DELETE',
+                data: {},
+                context: this,
+                success: function(data){
+                    $(this).parent().remove()
+                }
+            })
+        });
 })
   

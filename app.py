@@ -45,7 +45,7 @@ def node(nodeid):
             return render_template('new_node.html', nodeid=nodeid)
 
 
-@app.route("/node/<nodeid>/metadata/<key>", methods=['GET','POST'])
+@app.route("/node/<nodeid>/metadata/<key>", methods=['GET','POST','DELETE'])
 def node_metadata(nodeid, key):
     node = dg.get_node(nodeid)
 
@@ -53,11 +53,15 @@ def node_metadata(nodeid, key):
         pass
     elif request.method == 'GET':
         if 'edit' in request.args or not key in node.metadata:
-            return render_template('new_metadata.html', node=node, key=key)
+            return render_template('edit_metadata.html', node=node, key=key)
         else:
             return node.metadata[key]
     elif request.method == 'POST':
         node.metadata[key] = request.values['value']
+        save()
+        return "{}"
+    elif request.method == 'DELETE':
+        del node.metadata[key]
         save()
         return "{}"
 

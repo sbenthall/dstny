@@ -1,0 +1,10 @@
+dstny is a web front-end to jsgn backend that may one day be a tool for roadmapping complex projects.
+
+To use:
+
+- (probably want to be in a virtual env)
+- clone the git repo
+- pip install -r requirements.txt
+- python app.py
+- go to localhost:5000
+

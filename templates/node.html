@@ -3,7 +3,7 @@
 {% block head %}
   {{ super() }}
   <style type="text/css">
-    .remove-edge-span { background-color: #CCCCCC; }
+    .remove-metadata-span { background-color: #CCCCCC; }
     .edit-metadata-span { background-color: #88CCCC; }
   </style>
   <script type="text/javascript">
@@ -26,9 +26,12 @@
 <h2>Metadata</h2>
 
 {% for key, val in node.metadata.items() %}
-<h3>{{key}}</h3>
-<span class="edit-metadata-span" data-key="{{key}}">Edit</span>
-<p>{{val}}</p>
+<div>
+  <h3>{{key}}</h3>
+  <span class="edit-metadata-span" data-key="{{key}}">Edit</span>
+  <span class="remove-metadata-span" data-key="{{key}}">Remove</span>
+  <p>{{val}}</p>
+</div>
 {% endfor %}
 
 
