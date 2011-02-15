@@ -15,6 +15,21 @@ $(document).ready(function(){
         })
     });
 
+    $('#add-node-button').click(
+        function(evt){
+            nodeid = $('#add-node-input').val();
+            node_url = '/node/' + nodeid;
+            $.ajax(node_url, {
+                type: 'PUT',
+                data: {
+                    id: nodeid
+                },
+                success: function(){
+                    window.location = node_url;
+                }
+            })
+        });
+
     $('.remove-node-span').click(
         function(evt){
             var nodeid = $(this).attr('data-node');
