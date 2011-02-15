@@ -8,9 +8,7 @@ $(document).ready(function(){
             },
             dataType: "json",
             success: function(data, textStatus){
-                //window.location = data.url;
-                location.reload()
-                // location.replace(location.href.replace(/\?.*$/, '') + '?' + Math.random());
+                location.reload();
             }
         })
     });
