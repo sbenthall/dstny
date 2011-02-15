@@ -5,12 +5,15 @@
   <style type="text/css">
     .remove-metadata-span { background-color: #CCCCCC; }
     .edit-metadata-span { background-color: #88CCCC; }
+    .breadcrumb { font-size: smaller }
   </style>
   <script type="text/javascript">
     var nodeid = "{{node.id}}";
   </script>
 {% endblock %}
 {% block content %}
+<span class="breadcrumb"><a href="/">Index</a> > Node > {{ node.id }}</span>
+
 <h1>{{ node.id }}</h1>
 
 <h2>Links to</h2>
