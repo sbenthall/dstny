@@ -10,8 +10,6 @@
   </script>
 {% endblock %}
 {% block content %}
-  <textarea id="enter-metadata-value-textarea">
-    {{node.metadata[key]}}
-  </textarea>
+  <textarea id="enter-metadata-value-textarea">{{node.metadata[key]}}</textarea>
   <input type="button" value="Enter Metadata" id="enter-metadata-value-button"></input>
 {% endblock %}

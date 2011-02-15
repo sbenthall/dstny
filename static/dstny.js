@@ -82,7 +82,7 @@ $(document).ready(function(){
         }
     );
 
-    $("#edit-metadata-span").click(
+    $(".edit-metadata-span").click(
         function(evt){
             window.location = window.location + "/metadata/"
                 + $(this).attr("data-key") + "?edit";
