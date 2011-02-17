@@ -35,7 +35,7 @@
   <h3>{{key}}</h3>
   <span class="edit-metadata-span" data-key="{{key}}">Edit</span>
   <span class="remove-metadata-span" data-key="{{key}}">Remove</span>
-  <p>{{val}}</p>
+  <p>{{val | markdown}}</p>
 </div>
 {% endfor %}
 

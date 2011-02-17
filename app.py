@@ -6,8 +6,11 @@ from flask import url_for
 import os.path
 import json
 from jsgn import jsgn
+from flaskext.markdown import Markdown
+
 
 app = Flask(__name__)
+Markdown(app)
 
 graph_file_name = "graph.json"
 node_template_file_name = "node_template.json"
