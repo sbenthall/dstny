@@ -31,10 +31,13 @@
 <h2>Metadata</h2>
 
 {% for key, val in node.metadata.items() %}
-<div>
+<div style="clear: right">
+  <ul style="display:inline; float: right">
+    <li><span class="edit-metadata-span" data-key="{{key}}">Edit</span></li>
+    <li><span class="remove-metadata-span" data-key="{{key}}">Remove</span></li>
+  </ul>
+
   <h3>{{key}}</h3>
-  <span class="edit-metadata-span" data-key="{{key}}">Edit</span>
-  <span class="remove-metadata-span" data-key="{{key}}">Remove</span>
   <p>{{val | markdown}}</p>
 </div>
 {% endfor %}
