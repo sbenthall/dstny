@@ -2,9 +2,13 @@ dstny is a web front-end to jsgn backend that may one day be a tool for roadmapp
 
 To use:
 
-- (probably want to be in a virtual env)
-- clone the git repo
-- pip install -r requirements.txt
-- python app.py
-- go to localhost:5000
+virtualenv MYPROJ-dstny
+cd MYPROJ-dstny
+git clone git://github.com/sbenthall/dstny.git
+. bin/activate
+cd dstny
+pip install -r requirements.txt
+python app.py
+
+In browser, navigate to localhost:5000
 
