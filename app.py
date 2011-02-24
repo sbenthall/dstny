@@ -28,7 +28,7 @@ def index():
 def graph():
     return dg.dump()
 
-@app.route("/node/<nodeid>", methods=['GET', 'PUT','DELETE'])
+@app.route("/node/<nodeid>", methods=['GET', 'PUT','DELETE','POST'])
 def node(nodeid):
     if request.method == 'PUT':
         nodeid = request.values['id']
@@ -44,7 +44,25 @@ def node(nodeid):
         dg.remove_node(nodeid)
         save()
         return "{}"
-    else:
+    elif request.method == 'POST':
+        if 'rename' in request.values:
+            new_name = request.values['rename']
+            old_node = dg.get_node(nodeid)
+            # make node with new name and old metadata
+            new_node = dg.add_node(new_name, **old_node.metadata)
+            # add edges to new node that match the old nodes'
+            for from_node, to_node, metadata in dg:
+                # the from... edges
+                if from_node == nodeid:
+                    dg.add_edge(new_node.id, to_node, **metadata)
+                # the to... edges
+                if to_node == nodeid:
+                    dg.add_edge(from_node, new_node.id, **metadata)
+            # remove the old node
+            dg.remove_node(nodeid)
+            return "{}"
+        pass
+    else: # GET
         if dg.has_node(nodeid):
             return render_template('node.html', node=dg.get_node(nodeid))
         else:

@@ -43,6 +43,31 @@ $(document).ready(function(){
         }
     );
 
+    $('.rename-node-span').click(
+        function(evt){
+            if($(this).attr('data-live')){
+                var nodeid = $(this).attr('data-node');
+                var newid = $('#rename-node-input').val();
+                $.ajax('/node/' + nodeid, {
+                    type: 'POST',
+                    data: {
+                        'rename' : newid
+                    },
+                    dataType: "json",
+                    context: this,
+                    success: function(data){
+                        window.location = "/node/" + newid;
+                    }
+                })
+            } else {
+                rename_node_input = $('<input />');
+                rename_node_input.attr('id','rename-node-input');
+                $(this).before(rename_node_input);
+                $(this).attr('data-live', true)
+            }
+        }
+    );
+
     $('.remove-edge-span').click(
         function(evt){
             edge_url = '/edge/'+ nodeid + '/'

@@ -6,7 +6,9 @@
     .remove-metadata-span { background-color: #CCCCCC; }
     .remove-edge-span { background-color: #CCCCCC; }
     .edit-metadata-span { background-color: #88CCCC; }
+    .rename-node-span { background-color: #CC88CC; }
     .breadcrumb { font-size: smaller }
+    ul.controls { display:inline; float: right }
   </style>
   <script type="text/javascript">
     var nodeid = "{{node.id}}";
@@ -14,9 +16,13 @@
 {% endblock %}
 {% block content %}
 <span class="breadcrumb"><a href="/">Index</a> > Node > {{ node.id }}</span>
+<div>
+  <ul class="controls">
+    <li><span class="rename-node-span" data-node="{{node.id}}">Rename</span></li>
+  </ul>
 
 <h1>{{ node.id }}</h1>
-
+</div>
 <h2>Links to</h2>
 
 <ul>
@@ -32,7 +38,7 @@
 
 {% for key, val in node.metadata.items() %}
 <div style="clear: right">
-  <ul style="display:inline; float: right">
+  <ul class="controls">
     <li><span class="edit-metadata-span" data-key="{{key}}">Edit</span></li>
     <li><span class="remove-metadata-span" data-key="{{key}}">Remove</span></li>
   </ul>
