@@ -135,7 +135,7 @@ $(document).ready(function(){
                 data: {},
                 context: this,
                 success: function(data){
-                    $(this).parent().remove()
+                    $(this).parent().parent().parent().remove()
                 }
             })
         });
