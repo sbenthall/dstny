@@ -37,7 +37,8 @@ $(document).ready(function(){
                 dataType: "json",
                 context: this,
                 success: function(data){
-                    $(this).parent().remove()
+                    var nodeid = $(this).attr('data-node');
+                    $(this).parent().parent().find('[data-node="'+nodeid+'"]').parent().remove()
                 }
             })
         }
