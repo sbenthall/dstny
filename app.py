@@ -33,11 +33,7 @@ def node(nodeid):
     if request.method == 'PUT':
         nodeid = request.values['id']
         ## currently overwrites.  Want?
-        ## use template to preload metadata fields
-        file = open(node_template_file_name,"r")
-        metadata = json.loads(file.read())
-        node = dg.add_node(nodeid, **metadata)
-        save()
+        node = add_node(nodeid)
         url = url_for('node',nodeid=nodeid)
         return "{\"nodeid\": \"%s\",\"url\": \"%s\"}" % (nodeid, url)
     elif request.method == 'DELETE':
@@ -68,6 +64,14 @@ def node(nodeid):
         else:
             return render_template('new_node.html', nodeid=nodeid)
 
+def add_node(nodeid):
+    ## use template to preload metadata fields
+    file = open(node_template_file_name,"r")
+    metadata = json.loads(file.read())
+    node = dg.add_node(nodeid, **metadata)
+    save()
+    return node
+    
 
 @app.route("/node/<nodeid>/metadata/<key>", methods=['GET','POST','DELETE'])
 def node_metadata(nodeid, key):
@@ -93,6 +97,10 @@ def node_metadata(nodeid, key):
 @app.route("/edge/<from_node>/<to_node>", methods=['PUT','DELETE'])
 def edge(from_node, to_node):
     if request.method == 'PUT':
+        if not dg.has_node(from_node):
+            add_node(from_node)
+        if not dg.has_node(to_node):
+            add_node(to_node)
         dg.add_edge(from_node, to_node);
         save()
         return "{}"
