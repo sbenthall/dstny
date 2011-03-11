@@ -1,5 +1,7 @@
 dstny is a web front-end to jsgn backend that may one day be a tool for roadmapping complex projects.
 
+Requires full graphviz installation (including libgraphviz-dev)
+
 To use:
 
 virtualenv MYPROJ-dstny

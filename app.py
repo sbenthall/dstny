@@ -1,21 +1,29 @@
 from flask import Flask
 from flask import render_template
 from flask import request
+from flask import Response
 from flask import redirect
 from flask import url_for
 import os.path
 import json
 from jsgn import jsgn
 from flaskext.markdown import Markdown
-
+from pygraphviz import AGraph
 
 app = Flask(__name__)
 Markdown(app)
 
 graph_file_name = "graph.json"
 node_template_file_name = "node_template.json"
+graph_image_name = "graph.png"
 
 dg = jsgn.open_graph(graph_file_name)
+
+def draw_graph():
+    G = AGraph(dg.edges, directed=True)
+    G.draw(graph_image_name,prog="dot")
+    image_file = open(graph_image_name)
+    return image_file
 
 def save():
     jsgn.save_graph(dg, graph_file_name)    
@@ -27,6 +35,11 @@ def index():
 @app.route("/graph")
 def graph():
     return dg.dump()
+
+@app.route("/draw")
+def draw():
+    image_file = draw_graph()
+    return Response(image_file, mimetype="png")
 
 @app.route("/node/<nodeid>", methods=['GET', 'PUT','DELETE','POST'])
 def node(nodeid):
