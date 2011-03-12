@@ -20,7 +20,7 @@ graph_image_name = "graph.png"
 dg = jsgn.open_graph(graph_file_name)
 
 def draw_graph():
-    G = AGraph(dg.edges, directed=True)
+    G = AGraph(dg.edges, directed=True, rankdir="LR")
     G.draw(graph_image_name,prog="dot")
     image_file = open(graph_image_name)
     return image_file
