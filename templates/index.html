@@ -15,7 +15,7 @@
       <a name="{{ node.id }}" href="/node/{{ node.id }}">{{ node.id }}</a> - <span class="remove-node-span" data-node="{{node.id}}">Remove</span>
       <ul>
         {% for child in node.children() %}
-        <li><a class="child-link" href="#{{ child.id }}" data-node="{{ child.id }}">{{ child.id }}</a></li>
+        <li class="child-list"><a class="child-link" href="#{{ child.id }}" data-node="{{ child.id }}">{{ child.id }}</a></li>
         {% endfor %}
       </ul>
     </li>
