@@ -1,0 +1,17 @@
+
+/* index */
+.remove-node-span { background-color: #CCCCCC;}
+.child-list { font-size: smaller; display: inline }
+.child-link {  }
+
+/* node */
+.remove-metadata-span { background-color: #CCCCCC; }
+.remove-edge-span { background-color: #CCCCCC; }
+.edit-metadata-span { background-color: #88CCCC; }
+.rename-node-span { background-color: #CC88CC; }
+
+.breadcrumb { font-size: smaller }
+
+ul.controls { display:inline; float: right }
+
+#create-node-div { background-color:green }
