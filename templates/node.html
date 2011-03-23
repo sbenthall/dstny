@@ -22,10 +22,10 @@
   <li><a href="/node/{{ node.id }}">{{ node.id }}</a> - <span class="remove-edge-span" data-node="{{node.id}}">Remove</span></li>
 {% endfor %}
 </ul>
-<input type="text" name="to-node" id="to-node-input"></input>
-<input type="button" name="add-edge-button" value="Add Link" id="add-edge-button"></input>
-
-
+<p>
+    <input type="text" name="to-node" id="to-node-input"></input>
+    <input type="button" name="add-edge-button" value="Add Link" id="add-edge-button"></input>
+</p>
 <h2>Metadata</h2>
 
 {% for key, val in node.metadata.items() %}
@@ -36,12 +36,16 @@
   </ul>
 
   <h3>{{key}}</h3>
+  {% if val is string %}
   <div class="markdown">{{val | markdown}}</div>
+  {% else %}
+  {{ val }}
+  {% endif %}
 </div>
 {% endfor %}
 
-
-<input type="text" name="metadata-key" id="metadata-key-input"></input>
-<input type="button" name="add-metadata-key-button" value="Add Metadata" id="add-metadata-key-button"></input>
-
+<p>
+  <input type="text" name="metadata-key" id="metadata-key-input"></input>
+  <input type="button" name="add-metadata-key-button" value="Add Metadata" id="add-metadata-key-button"></input>
+</p>
 {% endblock %}

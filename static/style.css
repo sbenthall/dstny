@@ -13,6 +13,7 @@
 .breadcrumb { font-size: smaller }
 
 ul.controls { display:inline; float: right }
+ul.controls li { display:inline }
 
 #create-node-div { background-color:green }
 
