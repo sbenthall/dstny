@@ -86,8 +86,17 @@ def add_node(nodeid):
     return node
     
 
+@app.route("/node/<nodeid>/metadata", methods=['GET'])
+def node_metadata(nodeid):
+    node = dg.get_node(nodeid)
+
+    if node is None:
+        pass
+    elif request.method == 'GET':
+        return json.dumps(node.metadata)
+
 @app.route("/node/<nodeid>/metadata/<key>", methods=['GET','POST','DELETE'])
-def node_metadata(nodeid, key):
+def node_metadata_item(nodeid, key):
     node = dg.get_node(nodeid)
 
     if node is None:
