@@ -6,10 +6,62 @@
   </style>
   <script type="text/javascript">
     var nodeid = "{{node.id}}";
-    var key = "{{key}}"
+    var key = "{{key}}";
+    var mval_type = "string";
+
+
+    function on_metadata_load(data){
+        mval = data[key];
+        
+        if(typeof mval == 'string'){
+            $("#metadata-input-string").val(mval);
+            mval_type = 'string';
+        } else if (typeof mval == 'boolean'){
+            $("#metadata-input-boolean").attr("checked",mval)
+            mval_type = 'boolean';
+        }
+
+        set_metadata_input_visibility();
+        $("#metadata-type-radio-" + mval_type).attr("checked","true");
+    }
+
+    function set_metadata_input_visibility(){
+        $(".metadata-input").each(function(){
+            if($(this).attr("id") == "metadata-input-" + mval_type){
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
+    }
+
+    $(document).ready(function(){
+        var metadata = $.get(
+            "/node/" + nodeid + "/metadata", 
+            on_metadata_load,
+            "json"
+        )
+
+        $("input:radio[name=metadata-type-radio]").click(function(){
+            mval_type = $("input:radio[name=metadata-type-radio]:checked").val();
+            set_metadata_input_visibility();
+        });
+
+    })
+
+
   </script>
 {% endblock %}
 {% block content %}
-  <textarea id="enter-metadata-value-textarea" rows="8" cols="40">{{node.metadata[key]}}</textarea>
+  <p>
+    <input type="radio" id="metadata-type-radio-string" name="metadata-type-radio" value="string" checked="checked"></input>
+    <label>String</label>
+    <input type="radio" id="metadata-type-radio-boolean" name="metadata-type-radio" value="boolean" ></input>
+    <label>Boolean</label>
+  </p>
+  <p>
+    <textarea class="metadata-input" id="metadata-input-string" rows="8" cols="40"></textarea>
+    <input class="metadata-input" type="checkbox" id="metadata-input-boolean"></input>
+  <p>
   <input type="button" value="Enter Metadata" id="enter-metadata-value-button"></input>
 {% endblock %}

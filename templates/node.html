@@ -39,7 +39,9 @@
   {% if val is string %}
   <div class="markdown">{{val | markdown}}</div>
   {% else %}
-  {{ val }}
+  <p>
+    {{ val }}
+  </p>
   {% endif %}
 </div>
 {% endfor %}

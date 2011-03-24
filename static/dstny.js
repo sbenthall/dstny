@@ -108,11 +108,20 @@ $(document).ready(function(){
     $('#enter-metadata-value-button').click(
         function(evt){
             metadata_url = "/node/" + nodeid + "/metadata/" + key;
+
+            mval = function(){
+                if(mval_type == "string"){
+                    return '"' + $('#metadata-input-string').val() + '"';
+                } else if (mval_type == "boolean"){
+                    return $('#metadata-input-boolean').attr("checked");
+                }
+            }();
+
             $.ajax(metadata_url,
                    {
                        type: 'POST',
                        data: {
-                           'value' : $('#enter-metadata-value-textarea').val()
+                           'value' : mval
                        },
                        success: function(){
                            window.location = "/node/" + nodeid;

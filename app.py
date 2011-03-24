@@ -105,9 +105,9 @@ def node_metadata_item(nodeid, key):
         if 'edit' in request.args or not key in node.metadata:
             return render_template('edit_metadata.html', node=node, key=key)
         else:
-            return node.metadata[key]
+            return json.dumps(node.metadata[key])
     elif request.method == 'POST':
-        node.metadata[key] = request.values['value']
+        node.metadata[key] = json.loads(request.values['value'])
         save()
         return "{}"
     elif request.method == 'DELETE':
