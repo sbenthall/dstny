@@ -28,7 +28,7 @@
 </p>
 <h2>Metadata</h2>
 
-{% for key, val in node.metadata.items() %}
+{% for key, val in node.metadata.items()|inorder(['Summary','Use Case','Description']) %}
 <div style="clear: right">
   <ul class="controls">
     <li><span class="edit-metadata-span" data-key="{{key}}">Edit</span></li>

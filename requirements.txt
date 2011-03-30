@@ -1,4 +1,4 @@
 -e git+git://github.com/sbenthall/jsgn.git#egg=jsgn
 pygraphviz
-Flask
+Flask==dev
 Flask-Markdown

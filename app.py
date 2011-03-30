@@ -19,6 +19,16 @@ graph_image_name = "graph.png"
 
 dg = jsgn.open_graph(graph_file_name)
 
+@app.template_filter()
+def inorder(items,order):
+    def cm(e1, e2):
+        # inefficient
+        e1_index = order.index(e1) if e1 in order else 1e308
+        e2_index = order.index(e2) if e2 in order else 1e308
+        return cmp(e1_index, e2_index)
+    return sorted(items, cm, lambda i:i[0])
+
+
 def draw_graph():
     G = AGraph(dg.edges, directed=True, rankdir="LR")
     G.draw(graph_image_name,prog="dot")
