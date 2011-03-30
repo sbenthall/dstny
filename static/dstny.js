@@ -111,7 +111,10 @@ $(document).ready(function(){
 
             mval = function(){
                 if(mval_type == "string"){
-                    return '"' + $('#metadata-input-string').val() + '"';
+                    //escape the value's double quotes,
+                    //then wrap in quotes to make legal
+                    //json
+                    return '"' + $('#metadata-input-string').val().replace(/\u0022/g,'\\"') + '"';
                 } else if (mval_type == "boolean"){
                     return $('#metadata-input-boolean').attr("checked");
                 }
