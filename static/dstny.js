@@ -114,7 +114,7 @@ $(document).ready(function(){
                     //escape the value's double quotes,
                     //then wrap in quotes to make legal
                     //json
-                    return '"' + $('#metadata-input-string').val().replace(/\u0022/g,'\\"') + '"';
+                    return $.quoteString($('#metadata-input-string').val());
                 } else if (mval_type == "boolean"){
                     return $('#metadata-input-boolean').attr("checked");
                 }
